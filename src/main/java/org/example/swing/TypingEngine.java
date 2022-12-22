@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class TypingEngine extends JFrame {
+public class TypingEngine extends KeyAdapter {
 
     String typed = "";
     char[] toType = "This is the first sentence!".toCharArray();
@@ -13,13 +13,11 @@ public class TypingEngine extends JFrame {
 
     public TypingEngine() {
         System.out.println(new String(toType));
-        this.addKeyListener(new KeyAdapter() {
-            public void keyPressed(KeyEvent e) {
-                typing(e.getKeyChar());
-            }
-        });
 
-        this.setVisible(true);
+    }
+
+    public void keyPressed(KeyEvent e) {
+        typing(e.getKeyChar());
     }
 
     private void finishedTyping() {
@@ -66,5 +64,9 @@ public class TypingEngine extends JFrame {
                 mistakes += "," + typedKey;
             }
         }
+    }
+
+    public String getCurrentSentence() {
+        return new String(toType);
     }
 }
